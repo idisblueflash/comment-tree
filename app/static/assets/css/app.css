@@ -1,0 +1,22 @@
+
+
+.message {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.3em;
+}
+
+.timestamp {
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-size: 0.8em;
+}
+
+.repy  {
+    padding: 10px 20px;
+}
+
+.comments {
+    padding: 10px 20px;
+}
+.login {
+    padding: 10px 20px;
+}

@@ -1,0 +1,280 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Comment Tree in Vue.js</title>
+    <script src="{{ url_for('static', filename='vue2/vue.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/app.css')}}"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='bootstrap-3.3.7-dist/css/bootstrap.min.css') }}"
+          crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='axios/axios.js')}}"></script>
+    <script src="{{ url_for('static', filename='moment/moment.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lodash.js')}}"></script>
+</head>
+
+<body>
+<div id="app">
+    <header>
+        <div class="navbar navbar-default">
+            <h1 v-text="sitename"></h1>
+            <button class="btn btn-xs btn-default" v-on:click="replyComment(1)">New Comment</button>
+            <button v-show="needLogin" class="btn btn-xs btn-default" v-on:click="loginShowUp">Log In</button>
+            <button v-show="needLogin" class="btn btn-xs btn-default" v-on:click="signupShowUp">Sign Up</button>
+            <span class="label label-primary" v-text="userData.username"></span>
+            <span class="label label-default" v-text="userData.email"></span>
+        </div>
+    </header>
+    <main>
+        <div v-show="showReply" class="row repy form-group">
+            <div v-show="errorMessages" class="alert alert-danger" role="alert" v-text="errorMessages"></div>
+            <div class="col-xs-12">
+                <strong>Message:</strong>
+                <input v-model="replyData.message" class="form-control">
+                You can input <span v-text="leftWords"></span> words.
+            </div>
+            <div class="col-xs-12 boxes">
+                <button type="submit" class="btn btn-primary submit" v-on:click="replyForm">Reply</button>
+            </div>
+
+
+        </div>
+        <div v-show="showLogin" class="row login form-group">
+            <div v-show="errorMessages" class="alert alert-danger" role="alert" v-text="errorMessages"></div>
+            <div class="col-xs-12">
+                <strong>Username:</strong>
+                <input id="username" v-model="loginData.username" class="form-control">
+            </div>
+            <div class="col-xs-12">
+                <strong>email[Optional]:</strong>
+                <input id="email" v-model="loginData.email" class="form-control">
+            </div>
+            <div class="col-xs-12">
+                <strong>Password:</strong>
+                <input id="password" type='password' v-model="loginData.password" class="form-control">
+            </div>
+            <div class="col-xs-12 boxes">
+                <input id="remember" type="checkbox" v-model="loginData.remember">
+                <label for="remember">Remember Me:</label>
+            </div>
+            <div class="col-xs-12 boxes">
+                <button type="submit" class="btn btn-primary submit" v-on:click="loginForm">Login</button>
+            </div>
+        </div>
+        <div v-show="showSignup" class="row login form-group">
+            <div v-show="errorMessages" class="alert alert-danger" role="alert" v-text="errorMessages"></div>
+            <div class="col-xs-12">
+                <strong>Username:</strong>
+                <input id="username-signup" v-model="signupData.username" class="form-control">
+            </div>
+            <div class="col-xs-12">
+                <strong>email:</strong>
+                <input id="email-signup" v-model="signupData.email" class="form-control">
+            </div>
+            <div class="col-xs-12">
+                <strong>Password:</strong>
+                <input id="password-signup" type='password' v-model="signupData.password" class="form-control">
+            </div>
+            <div class="col-xs-12 boxes">
+                <button type="submit" class="btn btn-primary submit" v-on:click="signupForm">Sign Up</button>
+            </div>
+        </div>
+        <div v-show="showComment">
+            <div class="list-group comments">
+                <div v-for="comment in indentedComments">
+                    <div class="list-group-item">
+                        <h5 class="list-group-item-heading" v-html="comment.username"></h5>
+                        <p class="list-group-item-text" v-html="comment.message"></p>
+                        <div class="list-group-item-text timestamp" v-html="comment.timestamp">
+                        </div>
+                        <div class="col-xs-10" style="padding: 10px 10px"></div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-xs btn-default btn-block"
+                                    v-on:click="replyComment(comment.left_index)">Reply
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script type="text/javascript">
+    var APP_LOG_LIFECYCLE_EVENTS = false;
+
+    var commentTree = new Vue({
+        el: '#app',
+        data: {
+            sitename: 'Comment Tree in Vue.js',
+            showComment: true,
+            showLogin: false,
+            showReply: false,
+            showSignup: false,
+            comments: [],
+            replyComments: [],
+            replyData: {
+                message: '',
+                left_index: 1,
+            },
+            loginData: {
+                username: '',
+                password: '',
+                email: '',
+                remember: false,
+            },
+            signupData: {
+                username: '',
+                password: '',
+                email: '',
+
+            },
+            userData: {},
+            errorMessages: false
+        },
+        methods: {
+            replyComment: function (left_index) {
+                this.showReply = true;
+                this.replyData.left_index = left_index;
+                this.showLogin = false;
+                this.showSignup = false;
+                this.errorMessages = null;
+            },
+            signupShowUp: function () {
+                this.showSignup = true;
+                this.showReply = false;
+                this.showLogin = false;
+                this.errorMessages = null;
+            },
+            loginShowUp: function () {
+                this.showLogin = true;
+                this.showSignup = false;
+                this.showReply = false;
+                this.errorMessages = null;
+            },
+            signupForm: function () {
+                payload = this.signupData;
+                axios.post('./api/v1/sign-up/', payload)
+                    .then((response) => {
+                        this.userData = response.data;
+                        this.showSignup = false;
+                        this.errorMessages = null;
+                    }).catch((error) => {
+                    console.log(error.message);
+                    this.errorMessages = error.response.data.message;
+                })
+            },
+            loginForm: function () {
+                payload = this.loginData;
+                axios.post('./api/v1/get-token/', payload)
+                    .then((response) => {
+                        this.userData = response.data;
+                        this.showLogin = false;
+                    }).catch((error) => {
+                    console.log(error.message);
+                    this.errorMessages = error.response.data.message;
+                })
+            },
+            replyForm: function () {
+                token = this.userData.token || 'wrong.token.default';
+                console.log(this.replyData)
+                timestamp = moment().format('YYYY-MM-DD hh:mm:ss')
+                this.replyData['timestamp'] = timestamp;
+                this.replyData['user_id'] = this.userData.user_id;
+                axios.post('./api/v1/comments/post/', this.replyData, {
+                    headers: {'Authorization': 'JWT ' + token}
+                })
+                    .then((response) => {
+                        axios.get('./api/v1/comments/')
+                            .then((response) => {
+                                this.comments = response.data.comments;
+                                this.showReply = false;
+                                this.replyData.message = ''
+                            })
+                    }).catch((error) => {
+                    this.errorMessages = error.response.data.message;
+                })
+
+
+            }
+        },
+        computed: {
+            needLogin: function () {
+                return _.isEmpty(this.userData);
+            },
+            leftWords: function () {
+                return 200 - this.replyData.message.length;
+            },
+            indentedComments: function () {
+                return this.comments.filter((comment) => {
+                    if (comment.id !== 1) {
+                        return comment;
+                    }
+                }).map((comment) => {
+                    const space = '&nbsp;';
+                    const scaleTimes = 9;
+                    const indent = space.repeat((comment.depth - 1) * scaleTimes) + ' '
+                    comment.message = indent + comment.message;
+                    comment.timestamp = indent + comment.timestamp;
+                    comment.username = indent + comment.username;
+                    return comment;
+                })
+            }
+        },
+        beforeCreate: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('beforeCreate')
+            }
+        },
+        created: function () {
+            axios.get('./api/v1/comments/')
+                .then((response) => {
+                    this.comments = response.data.comments;
+                })
+
+            axios.get('./api/v1/auto-login/')
+                .then((response) => {
+                    this.userData = response.data
+                    this.showSignup = false;
+                    this.showLogin = false;
+                    this.errorMessages = null;
+                })
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('created')
+            }
+        },
+        beforeMount: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('beforeMount')
+            }
+        },
+        mounted: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('mounted')
+            }
+        },
+        beforeUpdate: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('beforeUpdate')
+            }
+        },
+        updated: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('updated')
+            }
+        },
+        beforeDestroy: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('beforeDestroy')
+            }
+        },
+        destroyed: function () {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log('destroyed')
+            }
+        }
+    });
+</script>
+</body>
+</html>

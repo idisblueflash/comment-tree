@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-28 Mon 02:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comments Tree Project</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Flash Hu" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Comments Tree Project</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgaafc255">1. PoC</a>
+<ul>
+<li><a href="#org443fb94">1.1. Flask Quick Learning</a>
+<ul>
+<li><a href="#org39a3fc7">1.1.1. Flask Web Development - Fast Reading</a></li>
+<li><a href="#org1f74d22">1.1.2. BDD with Flask</a></li>
+<li><a href="#orgb534113">1.1.3. RESTful Validator</a></li>
+<li><a href="#org14542c4">1.1.4. Flask-RESTful</a></li>
+<li><a href="#org7d43ee3">1.1.5. JWT</a></li>
+<li><a href="#org559e01e">1.1.6. Form validators</a></li>
+<li><a href="#org719fe94">1.1.7. Database</a></li>
+</ul>
+</li>
+<li><a href="#orgd4c845e">1.2. TDD</a></li>
+<li><a href="#org6f2123d">1.3. Comments Tree Investigate</a>
+<ul>
+<li><a href="#org7251eb8">1.3.1. The Adjacency List Model with single table - coding parsing</a></li>
+<li><a href="#org4a6b22f">1.3.2. The Adjacency List Model &amp; The Nested Set Model</a></li>
+</ul>
+</li>
+<li><a href="#org1043295">1.4. Vue Quick Learning</a></li>
+<li><a href="#org375a9ea">1.5. bootstrap 3</a>
+<ul>
+<li><a href="#org7513ec9">1.5.1. example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7f734d1">2. User Stories</a>
+<ul>
+<li><a href="#orgbb2996b">2.1. [could  have] Docker install &amp; run command</a></li>
+<li><a href="#orgc1b5b33">2.2. [could  have] generate comment message with a 'fill random message' button</a></li>
+<li><a href="#orgcd4135b">2.3. [could  have] refactor commets list with compoments</a></li>
+<li><a href="#org2d99f02">2.4. [could  have] Generate reply comment only to user not me</a></li>
+<li><a href="#orga91c76e">2.5. [could  have] deploy Flask with Production mode</a></li>
+<li><a href="#org27fab97">2.6. <span class="done DONE">DONE</span> [should have] User Log in  with Remember Me - Frontend</a>
+<ul>
+<li><a href="#org5a3c14a">2.6.1. remember me for 1 month not login</a></li>
+</ul>
+</li>
+<li><a href="#orga850a37">2.7. <span class="done DONE">DONE</span> [must   have] Bug: New Comment, Log In, Sign Up button should hide others</a></li>
+<li><a href="#orgbf587b3">2.8. <span class="done DONE">DONE</span> [must   have] need permission for post new / reply</a></li>
+<li><a href="#org479802e">2.9. <span class="done DONE">DONE</span> [should have] User Log in - Frontend</a>
+<ul>
+<li><a href="#org7e2e0ab">2.9.1. <span class="done DONE">DONE</span> login with username/email, password</a></li>
+<li><a href="#orgb02186d">2.9.2. <span class="done DONE">DONE</span> show username and email on page</a></li>
+</ul>
+</li>
+<li><a href="#orgc4d3211">2.10. <span class="done DONE">DONE</span> [should have] User Sign up - Frontend</a>
+<ul>
+<li><a href="#org2eb5166">2.10.1. <span class="done DONE">DONE</span> required username, password, email</a></li>
+<li><a href="#orga8c8536">2.10.2. <span class="done DONE">DONE</span> verify fields with API and alert in UI</a></li>
+</ul>
+</li>
+<li><a href="#orgbe0a8d4">2.11. <span class="done DONE">DONE</span> [should have] Reply a Comment - Frontend</a></li>
+<li><a href="#org06fbc52">2.12. <span class="done DONE">DONE</span> [should have] Post Comment - Frontend</a>
+<ul>
+<li><a href="#orgb7924d0">2.12.1. <span class="done DONE">DONE</span> show how many words left</a></li>
+</ul>
+</li>
+<li><a href="#org03a1ca5">2.13. <span class="done DONE">DONE</span> [should have] User Sign up with Remember Me</a></li>
+<li><a href="#org272a122">2.14. <span class="done DONE">DONE</span> [must   have] Flask Development Enviroment Setup</a>
+<ul>
+<li><a href="#orgaa71c8c">2.14.1. <span class="done DONE">DONE</span> quick run Flask</a></li>
+<li><a href="#org1ec724d">2.14.2. <span class="done DONE">DONE</span> BDD &amp; TDD</a></li>
+<li><a href="#orgc5cc354">2.14.3. <span class="done DONE">DONE</span> RESTful</a></li>
+<li><a href="#org4e0d99e">2.14.4. <span class="done DONE">DONE</span> Frontend</a></li>
+</ul>
+</li>
+<li><a href="#orgbea7a2f">2.15. <span class="done DONE">DONE</span> [must   have] View Comments</a>
+<ul>
+<li><a href="#orga0fdddf">2.15.1. <span class="done DONE">DONE</span> Tree like Comments</a></li>
+<li><a href="#org9aeb077">2.15.2. <span class="done DONE">DONE</span> Desc for comments</a></li>
+<li><a href="#org6a0fe37">2.15.3. <span class="done DONE">DONE</span> with User &amp; Post time</a></li>
+<li><a href="#orgd0fdca4">2.15.4. <span class="done DONE">DONE</span> No Login Needed</a></li>
+</ul>
+</li>
+<li><a href="#org466660e">2.16. <span class="done DONE">DONE</span> [must   have] Post Comment</a>
+<ul>
+<li><a href="#org8454942">2.16.1. <span class="done DONE">DONE</span> 3-200 limit for each content</a></li>
+<li><a href="#org860844c">2.16.2. <span class="done DONE">DONE</span> post first comment</a></li>
+<li><a href="#orga671ee1">2.16.3. <span class="done DONE">DONE</span> reply comment, left<sub>index</sub> of parent(desc as well)</a></li>
+<li><a href="#orge3f578c">2.16.4. <span class="done DONE">DONE</span> post new comment, reply 'root message'</a></li>
+<li><a href="#orge67ceb2">2.16.5. <span class="done DONE">DONE</span> Record post time</a></li>
+</ul>
+</li>
+<li><a href="#orgda7f946">2.17. <span class="done DONE">DONE</span> [must   have] Reply a Comment</a>
+<ul>
+<li><a href="#org59b25f4">2.17.1. <span class="done DONE">DONE</span> same ACs as Post a Comment</a></li>
+<li><a href="#org08a3583">2.17.2. <span class="done DONE">DONE</span> reply a Reply</a></li>
+<li><a href="#org7e3ac08">2.17.3. <span class="done DONE">DONE</span> unlimit Reply levels</a></li>
+</ul>
+</li>
+<li><a href="#org4e416f2">2.18. <span class="done DONE">DONE</span> [should have] View Comments - Frontend</a>
+<ul>
+<li><a href="#org128086c">2.18.1. <span class="done DONE">DONE</span> SPA for all Comments</a></li>
+</ul>
+</li>
+<li><a href="#orgf62298a">2.19. <span class="done DONE">DONE</span> [should have] Generate Testing Comments</a>
+<ul>
+<li><a href="#org8a9e627">2.19.1. <span class="done DONE">DONE</span> generate a random comment</a></li>
+<li><a href="#org23ff86f">2.19.2. <span class="done DONE">DONE</span> generate an user</a></li>
+<li><a href="#org378c1c5">2.19.3. <span class="done DONE">DONE</span> post a comment</a></li>
+<li><a href="#org97a2040">2.19.4. <span class="done DONE">DONE</span> post random reply</a></li>
+<li><a href="#org3b83ac6">2.19.5. <span class="done DONE">DONE</span> post  loop reply with level</a></li>
+</ul>
+</li>
+<li><a href="#orge619a72">2.20. <span class="done DONE">DONE</span> [must   have] User Log in</a>
+<ul>
+<li><a href="#org1b00dff">2.20.1. <span class="done DONE">DONE</span> username, password login</a></li>
+<li><a href="#org71ac07c">2.20.2. <span class="done DONE">DONE</span> email, password login</a></li>
+<li><a href="#org592ba30">2.20.3. <span class="done DONE">DONE</span> remember me for 1 month not login</a></li>
+<li><a href="#org272ae8b">2.20.4. <span class="done DONE">DONE</span> return username and email with Token</a></li>
+</ul>
+</li>
+<li><a href="#orgc8e9d1c">2.21. <span class="done DONE">DONE</span> [should have] Speed up Big Comments Tree (50 levels)</a>
+<ul>
+<li><a href="#orgbb58407">2.21.1. should be quick when over 50 lelels</a></li>
+</ul>
+</li>
+<li><a href="#orgd28aa1d">2.22. <span class="done DONE">DONE</span> [must   have] User Sign up</a>
+<ul>
+<li><a href="#orgea8510e">2.22.1. <span class="done DONE">DONE</span> input with username, password, and email</a></li>
+<li><a href="#org18577eb">2.22.2. <span class="done DONE">DONE</span> verify username:</a></li>
+<li><a href="#org00d5b06">2.22.3. <span class="done DONE">DONE</span> verify password</a></li>
+<li><a href="#org9982597">2.22.4. <span class="done DONE">DONE</span> verify email</a></li>
+</ul>
+</li>
+<li><a href="#org8ce6b65">2.23. <span class="done DONE">DONE</span> [must   have] User Password Encrypt in Database</a></li>
+<li><a href="#org9eff2cb">2.24. <span class="done DONE">DONE</span> [must   have] technique requirements</a>
+<ul>
+<li><a href="#orga2c916d">2.24.1. <span class="done DONE">DONE</span> User Python and Flask</a></li>
+<li><a href="#org347f5ef">2.24.2. <span class="done DONE">DONE</span> User Database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+A Comments Tree App with python and Database.
+</p>
+<div id="outline-container-orgaafc255" class="outline-2">
+<h2 id="orgaafc255"><span class="section-number-2">1</span> PoC</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org443fb94" class="outline-3">
+<h3 id="org443fb94"><span class="section-number-3">1.1</span> Flask Quick Learning</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org39a3fc7" class="outline-4">
+<h4 id="org39a3fc7"><span class="section-number-4">1.1.1</span> <a href="20220218200454-flask_web_development.html#ID-01CFE763-0304-4640-8E4C-0EF99A4C6778">Flask Web Development</a> - Fast Reading</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Blueprint need read More
+</p>
+</div>
+</div>
+<div id="outline-container-org1f74d22" class="outline-4">
+<h4 id="org1f74d22"><span class="section-number-4">1.1.2</span> BDD with Flask</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+<a href="https://semaphoreci.com/community/tutorials/bdd-testing-a-restful-web-application-in-python">https://semaphoreci.com/community/tutorials/bdd-testing-a-restful-web-application-in-python</a>
+<a href="https://medium.com/@sannidhi.s.t/bdd-for-flask-application-using-behave-selenium-fc6ec338c0e6">https://medium.com/@sannidhi.s.t/bdd-for-flask-application-using-behave-selenium-fc6ec338c0e6</a>
+behave - <a href="https://behave.readthedocs.io/en/stable/usecase_flask.html">https://behave.readthedocs.io/en/stable/usecase_flask.html</a>
+<a href="https://github.com/ismaild/flaskr-bdd">https://github.com/ismaild/flaskr-bdd</a>
+<a href="https://flask.palletsprojects.com/en/2.0.x/tutorial/tests/">https://flask.palletsprojects.com/en/2.0.x/tutorial/tests/</a>
+pytest <a href="https://flask.palletsprojects.com/en/2.0.x/testing/">https://flask.palletsprojects.com/en/2.0.x/testing/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb534113" class="outline-4">
+<h4 id="orgb534113"><span class="section-number-4">1.1.3</span> RESTful Validator</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+<a href="https://www.peterspython.com/en/blog/flask-restful-api-request-parameter-validation-with-marshmallow-schemas?theme=solar">https://www.peterspython.com/en/blog/flask-restful-api-request-parameter-validation-with-marshmallow-schemas?theme=solar</a>
+<a href="https://flask-restful.readthedocs.io/en/latest/reqparse.html#error-handling">https://flask-restful.readthedocs.io/en/latest/reqparse.html#error-handling</a>
+<a href="https://flask-restful.readthedocs.io/en/latest/quickstart.html#argument-parsing">https://flask-restful.readthedocs.io/en/latest/quickstart.html#argument-parsing</a>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org5ec5a73"></a>kanpai<br />
+<div class="outline-text-5" id="text-1-1-3-1">
+<p>
+<a href="https://medium.com/@pal.chandrakanta/flask-input-validation-using-kanpai-when-writing-rest-api-60158187c4d4">https://medium.com/@pal.chandrakanta/flask-input-validation-using-kanpai-when-writing-rest-api-60158187c4d4</a>
+<a href="https://github.com/chandrakantap/kanpai/blob/master/docs/stringvalidator.md#String-Validator">https://github.com/chandrakantap/kanpai/blob/master/docs/stringvalidator.md#String-Validator</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org14542c4" class="outline-4">
+<h4 id="org14542c4"><span class="section-number-4">1.1.4</span> Flask-RESTful</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+<a href="https://flask-restful.readthedocs.io/en/latest/">https://flask-restful.readthedocs.io/en/latest/</a>
+<a href="https://flask-restful.readthedocs.io/en/latest/quickstart.html?highlight=test">https://flask-restful.readthedocs.io/en/latest/quickstart.html?highlight=test</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org7d43ee3" class="outline-4">
+<h4 id="org7d43ee3"><span class="section-number-4">1.1.5</span> JWT</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+<a href="https://pyjwt.readthedocs.io/en/stable/usage.html#encoding-decoding-tokens-with-hs256">https://pyjwt.readthedocs.io/en/stable/usage.html#encoding-decoding-tokens-with-hs256</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org559e01e" class="outline-4">
+<h4 id="org559e01e"><span class="section-number-4">1.1.6</span> Form validators</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<p>
+<a href="https://wtforms.readthedocs.io/en/2.3.x/validators/">https://wtforms.readthedocs.io/en/2.3.x/validators/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org719fe94" class="outline-4">
+<h4 id="org719fe94"><span class="section-number-4">1.1.7</span> Database</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<p>
+row sql search - <a href="https://stackoverflow.com/questions/17972020/how-to-execute-raw-sql-in-flask-sqlalchemy-app">https://stackoverflow.com/questions/17972020/how-to-execute-raw-sql-in-flask-sqlalchemy-app</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd4c845e" class="outline-3">
+<h3 id="orgd4c845e"><span class="section-number-3">1.2</span> TDD</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+assert with detail - <a href="https://github.com/hamcrest/PyHamcrest">https://github.com/hamcrest/PyHamcrest</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org6f2123d" class="outline-3">
+<h3 id="org6f2123d"><span class="section-number-3">1.3</span> Comments Tree Investigate</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="https://stackoverflow.com/questions/846201/fast-relational-method-of-storing-tree-data-for-instance-threaded-comments-on-a">https://stackoverflow.com/questions/846201/fast-relational-method-of-storing-tree-data-for-instance-threaded-comments-on-a</a>
+</p>
+</div>
+<div id="outline-container-org7251eb8" class="outline-4">
+<h4 id="org7251eb8"><span class="section-number-4">1.3.1</span> The Adjacency List Model with single table - coding parsing</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+<a href="https://programmer.group/database-design-and-implementation-of-comment-system.html">https://programmer.group/database-design-and-implementation-of-comment-system.html</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org4a6b22f" class="outline-4">
+<h4 id="org4a6b22f"><span class="section-number-4">1.3.2</span> The Adjacency List Model &amp; The Nested Set Model</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+<a href="http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/">http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1043295" class="outline-3">
+<h3 id="org1043295"><span class="section-number-3">1.4</span> Vue Quick Learning</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+<a href="https://livebook.manning.com/book/vue-js-in-action/chapter-2/">https://livebook.manning.com/book/vue-js-in-action/chapter-2/</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org375a9ea" class="outline-3">
+<h3 id="org375a9ea"><span class="section-number-3">1.5</span> bootstrap 3</h3>
+<div class="outline-text-3" id="text-1-5">
+</div>
+<div id="outline-container-org7513ec9" class="outline-4">
+<h4 id="org7513ec9"><span class="section-number-4">1.5.1</span> example</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+<a href="https://getbootstrap.com/docs/3.3/examples/theme/">https://getbootstrap.com/docs/3.3/examples/theme/</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org7f734d1" class="outline-2">
+<h2 id="org7f734d1"><span class="section-number-2">2</span> User Stories</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgbb2996b" class="outline-3">
+<h3 id="orgbb2996b"><span class="section-number-3">2.1</span> [could  have] Docker install &amp; run command</h3>
+</div>
+<div id="outline-container-orgc1b5b33" class="outline-3">
+<h3 id="orgc1b5b33"><span class="section-number-3">2.2</span> [could  have] generate comment message with a 'fill random message' button</h3>
+</div>
+<div id="outline-container-orgcd4135b" class="outline-3">
+<h3 id="orgcd4135b"><span class="section-number-3">2.3</span> [could  have] refactor commets list with compoments</h3>
+</div>
+<div id="outline-container-org2d99f02" class="outline-3">
+<h3 id="org2d99f02"><span class="section-number-3">2.4</span> [could  have] Generate reply comment only to user not me</h3>
+</div>
+<div id="outline-container-orga91c76e" class="outline-3">
+<h3 id="orga91c76e"><span class="section-number-3">2.5</span> [could  have] deploy Flask with Production mode</h3>
+</div>
+<div id="outline-container-org27fab97" class="outline-3">
+<h3 id="org27fab97"><span class="section-number-3">2.6</span> <span class="done DONE">DONE</span> [should have] User Log in  with Remember Me - Frontend</h3>
+<div class="outline-text-3" id="text-2-6">
+</div>
+<div id="outline-container-org5a3c14a" class="outline-4">
+<h4 id="org5a3c14a"><span class="section-number-4">2.6.1</span> remember me for 1 month not login</h4>
+</div>
+</div>
+<div id="outline-container-orga850a37" class="outline-3">
+<h3 id="orga850a37"><span class="section-number-3">2.7</span> <span class="done DONE">DONE</span> [must   have] Bug: New Comment, Log In, Sign Up button should hide others</h3>
+<div class="outline-text-3" id="text-2-7">
+</div>
+</div>
+<div id="outline-container-orgbf587b3" class="outline-3">
+<h3 id="orgbf587b3"><span class="section-number-3">2.8</span> <span class="done DONE">DONE</span> [must   have] need permission for post new / reply</h3>
+<div class="outline-text-3" id="text-2-8">
+</div>
+</div>
+<div id="outline-container-org479802e" class="outline-3">
+<h3 id="org479802e"><span class="section-number-3">2.9</span> <span class="done DONE">DONE</span> [should have] User Log in - Frontend</h3>
+<div class="outline-text-3" id="text-2-9">
+</div>
+<div id="outline-container-org7e2e0ab" class="outline-4">
+<h4 id="org7e2e0ab"><span class="section-number-4">2.9.1</span> <span class="done DONE">DONE</span> login with username/email, password</h4>
+<div class="outline-text-4" id="text-2-9-1">
+</div>
+</div>
+<div id="outline-container-orgb02186d" class="outline-4">
+<h4 id="orgb02186d"><span class="section-number-4">2.9.2</span> <span class="done DONE">DONE</span> show username and email on page</h4>
+<div class="outline-text-4" id="text-2-9-2">
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4d3211" class="outline-3">
+<h3 id="orgc4d3211"><span class="section-number-3">2.10</span> <span class="done DONE">DONE</span> [should have] User Sign up - Frontend</h3>
+<div class="outline-text-3" id="text-2-10">
+</div>
+<div id="outline-container-org2eb5166" class="outline-4">
+<h4 id="org2eb5166"><span class="section-number-4">2.10.1</span> <span class="done DONE">DONE</span> required username, password, email</h4>
+<div class="outline-text-4" id="text-2-10-1">
+</div>
+</div>
+<div id="outline-container-orga8c8536" class="outline-4">
+<h4 id="orga8c8536"><span class="section-number-4">2.10.2</span> <span class="done DONE">DONE</span> verify fields with API and alert in UI</h4>
+<div class="outline-text-4" id="text-2-10-2">
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe0a8d4" class="outline-3">
+<h3 id="orgbe0a8d4"><span class="section-number-3">2.11</span> <span class="done DONE">DONE</span> [should have] Reply a Comment - Frontend</h3>
+<div class="outline-text-3" id="text-2-11">
+</div>
+</div>
+<div id="outline-container-org06fbc52" class="outline-3">
+<h3 id="org06fbc52"><span class="section-number-3">2.12</span> <span class="done DONE">DONE</span> [should have] Post Comment - Frontend</h3>
+<div class="outline-text-3" id="text-2-12">
+</div>
+<div id="outline-container-orgb7924d0" class="outline-4">
+<h4 id="orgb7924d0"><span class="section-number-4">2.12.1</span> <span class="done DONE">DONE</span> show how many words left</h4>
+<div class="outline-text-4" id="text-2-12-1">
+</div>
+</div>
+</div>
+<div id="outline-container-org03a1ca5" class="outline-3">
+<h3 id="org03a1ca5"><span class="section-number-3">2.13</span> <span class="done DONE">DONE</span> [should have] User Sign up with Remember Me</h3>
+<div class="outline-text-3" id="text-2-13">
+</div>
+</div>
+<div id="outline-container-org272a122" class="outline-3">
+<h3 id="org272a122"><span class="section-number-3">2.14</span> <span class="done DONE">DONE</span> [must   have] Flask Development Enviroment Setup</h3>
+<div class="outline-text-3" id="text-2-14">
+</div>
+<div id="outline-container-orgaa71c8c" class="outline-4">
+<h4 id="orgaa71c8c"><span class="section-number-4">2.14.1</span> <span class="done DONE">DONE</span> quick run Flask</h4>
+<div class="outline-text-4" id="text-2-14-1">
+</div>
+</div>
+<div id="outline-container-org1ec724d" class="outline-4">
+<h4 id="org1ec724d"><span class="section-number-4">2.14.2</span> <span class="done DONE">DONE</span> BDD &amp; TDD</h4>
+<div class="outline-text-4" id="text-2-14-2">
+</div>
+</div>
+<div id="outline-container-orgc5cc354" class="outline-4">
+<h4 id="orgc5cc354"><span class="section-number-4">2.14.3</span> <span class="done DONE">DONE</span> RESTful</h4>
+<div class="outline-text-4" id="text-2-14-3">
+</div>
+</div>
+<div id="outline-container-org4e0d99e" class="outline-4">
+<h4 id="org4e0d99e"><span class="section-number-4">2.14.4</span> <span class="done DONE">DONE</span> Frontend</h4>
+<div class="outline-text-4" id="text-2-14-4">
+</div>
+</div>
+</div>
+<div id="outline-container-orgbea7a2f" class="outline-3">
+<h3 id="orgbea7a2f"><span class="section-number-3">2.15</span> <span class="done DONE">DONE</span> [must   have] View Comments</h3>
+<div class="outline-text-3" id="text-2-15">
+</div>
+<div id="outline-container-orga0fdddf" class="outline-4">
+<h4 id="orga0fdddf"><span class="section-number-4">2.15.1</span> <span class="done DONE">DONE</span> Tree like Comments</h4>
+<div class="outline-text-4" id="text-2-15-1">
+</div>
+</div>
+<div id="outline-container-org9aeb077" class="outline-4">
+<h4 id="org9aeb077"><span class="section-number-4">2.15.2</span> <span class="done DONE">DONE</span> Desc for comments</h4>
+<div class="outline-text-4" id="text-2-15-2">
+</div>
+</div>
+<div id="outline-container-org6a0fe37" class="outline-4">
+<h4 id="org6a0fe37"><span class="section-number-4">2.15.3</span> <span class="done DONE">DONE</span> with User &amp; Post time</h4>
+<div class="outline-text-4" id="text-2-15-3">
+</div>
+</div>
+<div id="outline-container-orgd0fdca4" class="outline-4">
+<h4 id="orgd0fdca4"><span class="section-number-4">2.15.4</span> <span class="done DONE">DONE</span> No Login Needed</h4>
+<div class="outline-text-4" id="text-2-15-4">
+</div>
+</div>
+</div>
+<div id="outline-container-org466660e" class="outline-3">
+<h3 id="org466660e"><span class="section-number-3">2.16</span> <span class="done DONE">DONE</span> [must   have] Post Comment</h3>
+<div class="outline-text-3" id="text-2-16">
+<p>
+could be considered as Replay a Comment(the only one root commnet)
+</p>
+</div>
+<div id="outline-container-org8454942" class="outline-4">
+<h4 id="org8454942"><span class="section-number-4">2.16.1</span> <span class="done DONE">DONE</span> 3-200 limit for each content</h4>
+<div class="outline-text-4" id="text-2-16-1">
+</div>
+</div>
+<div id="outline-container-org860844c" class="outline-4">
+<h4 id="org860844c"><span class="section-number-4">2.16.2</span> <span class="done DONE">DONE</span> post first comment</h4>
+<div class="outline-text-4" id="text-2-16-2">
+</div>
+</div>
+<div id="outline-container-orga671ee1" class="outline-4">
+<h4 id="orga671ee1"><span class="section-number-4">2.16.3</span> <span class="done DONE">DONE</span> reply comment, left<sub>index</sub> of parent(desc as well)</h4>
+<div class="outline-text-4" id="text-2-16-3">
+</div>
+</div>
+<div id="outline-container-orge3f578c" class="outline-4">
+<h4 id="orge3f578c"><span class="section-number-4">2.16.4</span> <span class="done DONE">DONE</span> post new comment, reply 'root message'</h4>
+<div class="outline-text-4" id="text-2-16-4">
+</div>
+</div>
+<div id="outline-container-orge67ceb2" class="outline-4">
+<h4 id="orge67ceb2"><span class="section-number-4">2.16.5</span> <span class="done DONE">DONE</span> Record post time</h4>
+<div class="outline-text-4" id="text-2-16-5">
+</div>
+</div>
+</div>
+<div id="outline-container-orgda7f946" class="outline-3">
+<h3 id="orgda7f946"><span class="section-number-3">2.17</span> <span class="done DONE">DONE</span> [must   have] Reply a Comment</h3>
+<div class="outline-text-3" id="text-2-17">
+</div>
+<div id="outline-container-org59b25f4" class="outline-4">
+<h4 id="org59b25f4"><span class="section-number-4">2.17.1</span> <span class="done DONE">DONE</span> same ACs as Post a Comment</h4>
+<div class="outline-text-4" id="text-2-17-1">
+</div>
+</div>
+<div id="outline-container-org08a3583" class="outline-4">
+<h4 id="org08a3583"><span class="section-number-4">2.17.2</span> <span class="done DONE">DONE</span> reply a Reply</h4>
+<div class="outline-text-4" id="text-2-17-2">
+</div>
+</div>
+<div id="outline-container-org7e3ac08" class="outline-4">
+<h4 id="org7e3ac08"><span class="section-number-4">2.17.3</span> <span class="done DONE">DONE</span> unlimit Reply levels</h4>
+<div class="outline-text-4" id="text-2-17-3">
+</div>
+</div>
+</div>
+<div id="outline-container-org4e416f2" class="outline-3">
+<h3 id="org4e416f2"><span class="section-number-3">2.18</span> <span class="done DONE">DONE</span> [should have] View Comments - Frontend</h3>
+<div class="outline-text-3" id="text-2-18">
+</div>
+<div id="outline-container-org128086c" class="outline-4">
+<h4 id="org128086c"><span class="section-number-4">2.18.1</span> <span class="done DONE">DONE</span> SPA for all Comments</h4>
+<div class="outline-text-4" id="text-2-18-1">
+</div>
+</div>
+</div>
+<div id="outline-container-orgf62298a" class="outline-3">
+<h3 id="orgf62298a"><span class="section-number-3">2.19</span> <span class="done DONE">DONE</span> [should have] Generate Testing Comments</h3>
+<div class="outline-text-3" id="text-2-19">
+</div>
+<div id="outline-container-org8a9e627" class="outline-4">
+<h4 id="org8a9e627"><span class="section-number-4">2.19.1</span> <span class="done DONE">DONE</span> generate a random comment</h4>
+<div class="outline-text-4" id="text-2-19-1">
+</div>
+</div>
+
+<div id="outline-container-org23ff86f" class="outline-4">
+<h4 id="org23ff86f"><span class="section-number-4">2.19.2</span> <span class="done DONE">DONE</span> generate an user</h4>
+<div class="outline-text-4" id="text-2-19-2">
+</div>
+</div>
+<div id="outline-container-org378c1c5" class="outline-4">
+<h4 id="org378c1c5"><span class="section-number-4">2.19.3</span> <span class="done DONE">DONE</span> post a comment</h4>
+<div class="outline-text-4" id="text-2-19-3">
+</div>
+</div>
+<div id="outline-container-org97a2040" class="outline-4">
+<h4 id="org97a2040"><span class="section-number-4">2.19.4</span> <span class="done DONE">DONE</span> post random reply</h4>
+<div class="outline-text-4" id="text-2-19-4">
+</div>
+</div>
+<div id="outline-container-org3b83ac6" class="outline-4">
+<h4 id="org3b83ac6"><span class="section-number-4">2.19.5</span> <span class="done DONE">DONE</span> post  loop reply with level</h4>
+<div class="outline-text-4" id="text-2-19-5">
+</div>
+</div>
+</div>
+<div id="outline-container-orge619a72" class="outline-3">
+<h3 id="orge619a72"><span class="section-number-3">2.20</span> <span class="done DONE">DONE</span> [must   have] User Log in</h3>
+<div class="outline-text-3" id="text-2-20">
+</div>
+<div id="outline-container-org1b00dff" class="outline-4">
+<h4 id="org1b00dff"><span class="section-number-4">2.20.1</span> <span class="done DONE">DONE</span> username, password login</h4>
+<div class="outline-text-4" id="text-2-20-1">
+</div>
+</div>
+<div id="outline-container-org71ac07c" class="outline-4">
+<h4 id="org71ac07c"><span class="section-number-4">2.20.2</span> <span class="done DONE">DONE</span> email, password login</h4>
+<div class="outline-text-4" id="text-2-20-2">
+</div>
+</div>
+<div id="outline-container-org592ba30" class="outline-4">
+<h4 id="org592ba30"><span class="section-number-4">2.20.3</span> <span class="done DONE">DONE</span> remember me for 1 month not login</h4>
+<div class="outline-text-4" id="text-2-20-3">
+</div>
+</div>
+<div id="outline-container-org272ae8b" class="outline-4">
+<h4 id="org272ae8b"><span class="section-number-4">2.20.4</span> <span class="done DONE">DONE</span> return username and email with Token</h4>
+<div class="outline-text-4" id="text-2-20-4">
+</div>
+</div>
+</div>
+<div id="outline-container-orgc8e9d1c" class="outline-3">
+<h3 id="orgc8e9d1c"><span class="section-number-3">2.21</span> <span class="done DONE">DONE</span> [should have] Speed up Big Comments Tree (50 levels)</h3>
+<div class="outline-text-3" id="text-2-21">
+</div>
+<div id="outline-container-orgbb58407" class="outline-4">
+<h4 id="orgbb58407"><span class="section-number-4">2.21.1</span> should be quick when over 50 lelels</h4>
+</div>
+</div>
+<div id="outline-container-orgd28aa1d" class="outline-3">
+<h3 id="orgd28aa1d"><span class="section-number-3">2.22</span> <span class="done DONE">DONE</span> [must   have] User Sign up</h3>
+<div class="outline-text-3" id="text-2-22">
+</div>
+<div id="outline-container-orgea8510e" class="outline-4">
+<h4 id="orgea8510e"><span class="section-number-4">2.22.1</span> <span class="done DONE">DONE</span> input with username, password, and email</h4>
+<div class="outline-text-4" id="text-2-22-1">
+</div>
+</div>
+<div id="outline-container-org18577eb" class="outline-4">
+<h4 id="org18577eb"><span class="section-number-4">2.22.2</span> <span class="done DONE">DONE</span> verify username:</h4>
+<div class="outline-text-4" id="text-2-22-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgaf5b0f8"></a><span class="done DONE">DONE</span> not empty<br />
+<div class="outline-text-5" id="text-2-22-2-1">
+</div>
+</li>
+<li><a id="org41007f9"></a><span class="done DONE">DONE</span> lenth betwee 5 and 20<br />
+<div class="outline-text-5" id="text-2-22-2-2">
+</div>
+</li>
+<li><a id="orga00255e"></a><span class="done DONE">DONE</span> only exist with number and alphabet<br />
+<div class="outline-text-5" id="text-2-22-2-3">
+</div>
+</li>
+<li><a id="org14689f0"></a><span class="done DONE">DONE</span> cannot duplicated with exiss<br />
+<div class="outline-text-5" id="text-2-22-2-4">
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org00d5b06" class="outline-4">
+<h4 id="org00d5b06"><span class="section-number-4">2.22.3</span> <span class="done DONE">DONE</span> verify password</h4>
+<div class="outline-text-4" id="text-2-22-3">
+</div>
+<ol class="org-ol">
+<li><a id="org552efbf"></a><span class="done DONE">DONE</span> not empty<br />
+<div class="outline-text-5" id="text-2-22-3-1">
+</div>
+</li>
+<li><a id="orga9144fd"></a><span class="done DONE">DONE</span> lenth betwee 8 and 20<br />
+<div class="outline-text-5" id="text-2-22-3-2">
+</div>
+</li>
+<li><a id="orgb162ed7"></a><span class="done DONE">DONE</span> at least has a UpperCase, LowerCase, number, special char<br />
+<div class="outline-text-5" id="text-2-22-3-3">
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9982597" class="outline-4">
+<h4 id="org9982597"><span class="section-number-4">2.22.4</span> <span class="done DONE">DONE</span> verify email</h4>
+<div class="outline-text-4" id="text-2-22-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgd93912e"></a><span class="done DONE">DONE</span> not empty<br />
+<div class="outline-text-5" id="text-2-22-4-1">
+</div>
+</li>
+<li><a id="org725d4d6"></a><span class="done DONE">DONE</span> correcty form of email<br />
+<div class="outline-text-5" id="text-2-22-4-2">
+</div>
+</li>
+<li><a id="org7e70ad5"></a><span class="done DONE">DONE</span> cannot duplicated with exists<br />
+<div class="outline-text-5" id="text-2-22-4-3">
+</div>
+</li>
+<li><a id="org3f9e59b"></a><span class="done DONE">DONE</span> don't send confirm email out<br />
+<div class="outline-text-5" id="text-2-22-4-4">
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8ce6b65" class="outline-3">
+<h3 id="org8ce6b65"><span class="section-number-3">2.23</span> <span class="done DONE">DONE</span> [must   have] User Password Encrypt in Database</h3>
+<div class="outline-text-3" id="text-2-23">
+</div>
+</div>
+<div id="outline-container-org9eff2cb" class="outline-3">
+<h3 id="org9eff2cb"><span class="section-number-3">2.24</span> <span class="done DONE">DONE</span> [must   have] technique requirements</h3>
+<div class="outline-text-3" id="text-2-24">
+</div>
+<div id="outline-container-orga2c916d" class="outline-4">
+<h4 id="orga2c916d"><span class="section-number-4">2.24.1</span> <span class="done DONE">DONE</span> User Python and Flask</h4>
+<div class="outline-text-4" id="text-2-24-1">
+</div>
+</div>
+<div id="outline-container-org347f5ef" class="outline-4">
+<h4 id="org347f5ef"><span class="section-number-4">2.24.2</span> <span class="done DONE">DONE</span> User Database</h4>
+<div class="outline-text-4" id="text-2-24-2">
+</div>
+<ol class="org-ol">
+<li><a id="org0b9e0b5"></a><span class="done DONE">DONE</span> SQL or NoSQL<br />
+<div class="outline-text-5" id="text-2-24-2-1">
+</div>
+</li>
+<li><a id="org3f0591e"></a><span class="done DONE">DONE</span> create table by yourself<br />
+<div class="outline-text-5" id="text-2-24-2-2">
+</div>
+</li>
+<li><a id="orgbad0ee4"></a><span class="done DONE">DONE</span> use SQL/NO-SQL/ORM<br />
+<div class="outline-text-5" id="text-2-24-2-3">
+</div>
+</li>
+<li><a id="org84ed0d5"></a><span class="done DONE">DONE</span> use sqlite file since easy to install &amp; review<br />
+<div class="outline-text-5" id="text-2-24-2-4">
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2022-02-18 Fri 19:21</p>
+<p class="author">Author: Flash Hu</p>
+<p class="date">Created: 2022-02-28 Mon 02:01</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
